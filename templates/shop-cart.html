@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Zay Shop - Product Listing Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/template.css">
+    <!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
+</head>
+
+<body>
+    <!-- Start Top Nav -->
+    <!-- <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                </div>
+                <div>
+                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav> -->
+    <!-- Close Top Nav -->
+
+    <!-- modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">購物車內容</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">品項</th>
+                                <th scope="col">價格</th>
+                                <th scope="col">數量</th>
+                                <th scope="col">小計</th>
+                                <th scope="col">刪除鈕</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shopping_cart">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-success" onclick="location.href='/buy'">購買</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end-modal -->
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="/">
+                擄味滷味
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+                id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-weight:500 !important;" href="/">首頁</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-weight:500 !important;" href="#about_us">關於我們</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-weight:500 !important;" href="/shop">購買商品</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-weight:500 !important;" href="#about_us">聯絡我們</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                    <!-- <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                            <div class="input-group-text">
+                                <i class="fa fa-fw fa-search"></i>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                    </a> -->
+                    <a class="nav-icon position-relative text-decoration-none" id="shopping_number"
+                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+    <!-- Modal -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 pt-1 mb-5 text-right">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <button type="submit" class="input-group-text bg-success text-light">
+                        <i class="fa fa-fw fa-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Start Content -->
+    <div class="container py-5" >
+        <h3 class="text-center">商品明細</h3>
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-9">
+                <div class="row">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">圖片</th>
+                                <th scope="col">名稱</th>
+                                <th scope="col">單價</th>
+                                <th scope="col">數量</th>
+                                <th scope="col">小計</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in shopping_list%}
+                            <tr>
+                                <th scope="row">{{i['serial_number']}}</th>
+                                <td>
+                                    <div class="card mb-4 product-wap rounded-0 shadow" style=" width: 60px">
+                                        <div class="card rounded-0">
+                                            <img class="card-img rounded-0 img-fluid"
+                                                style="width: 60px !important; height:auto;" src="{{i['photo']}}">
+                                            <div
+                                                class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                                <ul class="list-unstyled">
+                                                    <li id=""><a class="btn btn-success text-white mt-2"
+                                                            href="/shop_single?id={{i['id']}}"><i
+                                                                class="far fa-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                </td>
+                                <td>{{i['name']}}</td>
+                                <td>{{i['price']}}</td>
+                                <td>{{i['number']}}</td>
+                                <td>${{ i['number']*i['price'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <h5 class="text-end pe-md-5 pe-2">運費＄{{delivery_fee}}</h5>
+                    <h5 class="text-end pe-md-5 pe-2">總金額＄{{cost}}</h5>
+                </div>
+                <hr size="2px" width="100%">
+                <div class="row px-5 mt-sm-5">
+                    <h3 class="text-center mb-4">購買人資料</h3>
+                    <div class="col-md-6 col-12">
+                        <p class="text-500">手機號碼</p>
+                        <div class="form-floating mb-3">
+                          <input type="phone" class="form-control" placeholder="">
+                          <label>請輸入手機號碼</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <p class="text-500">電子郵件</p>
+                        <div class="form-floating mb-3">
+                          <input type="email" class="form-control" placeholder="">
+                          <label>請輸入電子郵件</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <p class="text-500">寄送地址</p>
+                        <div class="form-floating mb-3">
+                          <input type="address" class="form-control" placeholder="">
+                          <label>寄送地址</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <p class="text-500">帳號末三碼</p>
+                        <div class="form-floating mb-3">
+                          <input type="address" class="form-control" placeholder="">
+                          <label>請輸入帳號末三碼</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Content -->
+
+
+
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">擄味滷味</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            新北市三重區重陽路一段146號
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none" href="tel:02-29872966">(02)2987-2966</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <!-- <h2 class="h2 text-light border-bottom pb-3 border-light" style="font-weight:400 !important;">產品分類</h2>
+                        <ul class="list-unstyled text-light footer-link-list">
+                            <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                            <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
+                            <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
+                            <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
+                            <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
+                            <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
+                            <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
+                        </ul> -->
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light" style="font-weight:400 !important;">
+                        更多資訊
+                    </h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="/" style="font-weight:400 !important;">首頁</a></li>
+                        <li><a class="text-decoration-none" href="#about_us"
+                                style="font-weight:400 !important;">關於我們</a></li>
+                        <li><a class="text-decoration-none" href="#about_us"
+                                style="font-weight:400 !important;">商店資訊</a></li>
+                        <li><a class="text-decoration-none" href="#about_us"
+                                style="font-weight:400 !important;">聯絡我們</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row text-light mb-4" id="about_us">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i
+                                    class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i
+                                    class="fab fa-twitter fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <div class="col-auto">
+                        <label class="sr-only" for="subscribeEmail">Email address</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
+                            <div class="input-group-text btn-success text-light">Subscribe</div>
+                        </div>
+                    </div> -->
+            </div>
+        </div>
+
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2023 <a href="mailto:iterationstudio2022@gmail.com ">Iteration
+                                Studio</a>
+                            | Designed by <a rel="sponsored" href="#" target="_blank">TimHu</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Start Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/assets/js/ajax.js"></script>
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- End Script -->
+</body>
+
+</html>
