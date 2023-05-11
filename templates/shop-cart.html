@@ -166,11 +166,11 @@ https://templatemo.com/tm-559-zay-shop
 
 
     <!-- Start Content -->
-    <div class="container py-5" >
+    <div class="container py-5">
         <h3 class="text-center">商品明細</h3>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-9">
-                <div class="row">
+                <div class="row" style="max-height:700px !important;overflow-y:scroll;">
                     <table class="table table-borderless">
                         <thead>
                             <tr>
@@ -210,41 +210,48 @@ https://templatemo.com/tm-559-zay-shop
                             {% endfor %}
                         </tbody>
                     </table>
-                    <h5 class="text-end pe-md-5 pe-2">運費＄{{delivery_fee}}</h5>
-                    <h5 class="text-end pe-md-5 pe-2">總金額＄{{cost}}</h5>
+                </div>
+                <div class="row">
+                    <h5 class="text-end pe-md-5 pe-4">運費＄{{delivery_fee}}</h5>
+                    <h5 class="text-end pe-md-5 pe-4">總金額＄{{cost}}</h5>
+                    <p class="text-400 text-center">凡購買商品滿3000元,一箱免運費！未滿3000元，冷凍運費為245元</p>
                 </div>
                 <hr size="2px" width="100%">
-                <div class="row px-5 mt-sm-5">
-                    <h3 class="text-center mb-4">購買人資料</h3>
-                    <div class="col-md-6 col-12">
-                        <p class="text-500">手機號碼</p>
-                        <div class="form-floating mb-3">
-                          <input type="phone" class="form-control" placeholder="">
-                          <label>請輸入手機號碼</label>
+                <form action="/finish_buying" method="POST">
+                    <div class="row px-5 mt-sm-5">
+                        <h3 class="text-center mb-4">購買人資料</h3>
+                        <div class="col-md-6 col-12">
+                            <p class="text-500">手機號碼</p>
+                            <div class="form-floating mb-3">
+                                <input type="phone" name="phone" class="form-control" placeholder="">
+                                <label>請輸入手機號碼</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <p class="text-500">電子郵件</p>
-                        <div class="form-floating mb-3">
-                          <input type="email" class="form-control" placeholder="">
-                          <label>請輸入電子郵件</label>
+                        <div class="col-md-6 col-12">
+                            <p class="text-500">電子郵件</p>
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email" class="form-control" placeholder="">
+                                <label>請輸入電子郵件</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <p class="text-500">寄送地址</p>
-                        <div class="form-floating mb-3">
-                          <input type="address" class="form-control" placeholder="">
-                          <label>寄送地址</label>
+                        <div class="col-md-6 col-12">
+                            <p class="text-500">寄送地址</p>
+                            <div class="form-floating mb-3">
+                                <input type="address" name="address"  class="form-control" placeholder="">
+                                <label>寄送地址</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <p class="text-500">帳號末三碼</p>
-                        <div class="form-floating mb-3">
-                          <input type="address" class="form-control" placeholder="">
-                          <label>請輸入帳號末三碼</label>
+                        <div class="col-md-6 col-12">
+                            <p class="text-500">帳號末三碼</p>
+                            <div class="form-floating mb-3">
+                                <input type="account" name="account"  class="form-control" placeholder="">
+                                <label>請輸入帳號末三碼</label>
+                            </div>
                         </div>
+                        <button type="sumbit" class="btn btn-success rounded-3 mx-auto mt-4" style="max-width: 500px;">確認購買</button>
+
                     </div>
-                </div>
+                </form>
 
             </div>
         </div>

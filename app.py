@@ -6,7 +6,7 @@ from requests import Session
 from dotenv import load_dotenv
 
 
-from model import Product
+from model import *
 
 import pymongo ,certifi,math,os
 
@@ -26,7 +26,6 @@ app.secret_key="any string"
 shopping_dict=[""]
 @app.route("/")
 def index():
-    session.clear()
     related_product_list=[]
     collection=db.product
     product_result=list(collection.find())
@@ -69,11 +68,6 @@ def shop_page():
 
 @app.route("/shop_single")
 def shop_single():
-    try:
-        print(session["shopping_list"])
-    except:
-        session["shopping_list"]=[()]
-        session["shopping_list_python"]=[()]
     #get_product_information
     if request.is_json:
         result=Product.get_inform(request.args.get("button_text"),request.args.get("id"))
@@ -100,8 +94,11 @@ def add_to_cart():
 
 @app.route("/get_cart")
 def get_cart():
-    if request.is_json:
-        return session["shopping_list"]
+    if request.is_json: 
+        if not session["shopping_list"]:
+            return "error"
+        else:
+            return session["shopping_list"]
     
 @app.route("/delete_cart")
 def delete_cart():
@@ -117,25 +114,39 @@ def delete_cart():
 @app.route("/buy")
 def buy():
     try:
-        print(session["shopping_list_python"])
-        shopping_list=session["shopping_list_python"]
-        number=0
-        for i in shopping_list:
-            number+=1
-            cost+=i["number"]*i["price"]
-            i["photo"]=Product.get_photo(i["id"])
-            i["serial_number"]=number
-        if cost<600:
-            delivery_fee=60
-            cost=cost+delivery_fee
-        session["cost"]=cost
-        session["delivery_fee"]=delivery_fee
+        print("HERE",session["shopping_list_python"][0]["number"])
     except:
-        shopping_list=[]
-        cost=0
-        delivery_fee=0
+        print("IM")
+        return render_template("error.html",message=["您的購物車沒有商品","快把喜歡的商品帶回家～"])
+    print(session["shopping_list_python"])
+    shopping_list=session["shopping_list_python"]
+    number=0
+    cost=0
+    delivery_fee=0
+    for i in shopping_list:
+        number+=1
+        cost+=i["number"]*i["price"]
+        i["photo"]=Product.get_photo(i["id"])
+        i["serial_number"]=number
+    if cost<3000:
+        delivery_fee=245
+        cost=cost+delivery_fee
+    session["cost"]=cost
+    session["delivery_fee"]=delivery_fee
 
     return render_template("shop-cart.html",shopping_list=shopping_list,list_len=len(shopping_list),cost=cost,delivery_fee=delivery_fee)
+
+@app.route("/finish_buying",methods=["POST"])
+def finish_buying():
+    Order.update(request.form.get("phone"),request.form.get("email"),request.form.get("address"),request.form.get("account"),session["cost"],session["shopping_list_python"])
+    session.clear()
+    return render_template("error.html",message=["商品訂購成功","請檢查電子郵件訊息"])
+
+@app.route("/clear")
+def clear():
+    session.clear()
+    return redirect("/")
+
 # @app.route("/test",methods=["GET","POST"])
 # def test():
 #     if request.is_json:
