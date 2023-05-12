@@ -1,6 +1,7 @@
 from crypt import methods
 from imp import reload
 from dotenv import load_dotenv
+from send_email import send_email
 import pymongo,certifi,os,random,string
 
 load_dotenv()
@@ -39,7 +40,7 @@ class Product:
         pass
 
 class Order:
-    def update(phone,email,address,account,price,shopping_list):
+    def update(phone,email,address,account,price,shopping_list,delivery_fee):
         collection=db.order
         order_id=list(collection.find({},{"order_id":1}).sort("order_id",-1))[0]["order_id"]+1
         letters = string.ascii_uppercase + string.digits
@@ -57,19 +58,7 @@ class Order:
             "pay_status":0,
             "disable":0
         })
-        Order.email(email,password)
+        send_email(email,password,order_id,shopping_list,price,delivery_fee)
+    
         
-    def email(email_address,password):
-        import email.message,smtplib
-        msg=email.message.EmailMessage()
-        msg["From"]=os.getenv("FROM_EMAIL")
-        msg["To"]=email_address
-        msg["Subject"]="產品訂購成功通知"
-        msg.add_alternative("<h3>您的密碼是：</h3>"+password,subtype="html") #HTML信件內容
-
-        server=smtplib.SMTP_SSL("smtp.gmail.com",465) #建立gmail連驗
-        server.login(os.getenv("FROM_EMAIL"),os.getenv("GOOGLE_PASSWORD"))
-        server.send_message(msg)
-        server.close() #發送完成後關閉連線
-        print("發送成功")
 

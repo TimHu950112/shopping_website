@@ -138,7 +138,7 @@ def buy():
 
 @app.route("/finish_buying",methods=["POST"])
 def finish_buying():
-    Order.update(request.form.get("phone"),request.form.get("email"),request.form.get("address"),request.form.get("account"),session["cost"],session["shopping_list_python"])
+    Order.update(request.form.get("phone"),request.form.get("email"),request.form.get("address"),request.form.get("account"),session["cost"],session["shopping_list_python"],session["delivery_fee"])
     session.clear()
     return render_template("error.html",message=["商品訂購成功","請檢查電子郵件訊息"])
 
