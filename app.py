@@ -95,10 +95,13 @@ def add_to_cart():
 @app.route("/get_cart")
 def get_cart():
     if request.is_json: 
-        if not session["shopping_list"]:
+        try:
+            if not session["shopping_list"]:
+                return "error"
+            else:
+                return session["shopping_list"]
+        except:
             return "error"
-        else:
-            return session["shopping_list"]
     
 @app.route("/delete_cart")
 def delete_cart():
@@ -146,6 +149,19 @@ def finish_buying():
 def clear():
     session.clear()
     return redirect("/")
+
+@app.route("/search_order")
+def search_order():
+    order_result=Order.search(request.args.get("id"),request.args.get("psw"))
+    if request.args.get("status")=="customer":
+        return render_template("order-cart.html",shopping_list=order_result["shopping_list"],data_result=order_result)
+    else:
+        return render_template("admin-cart.html",shopping_list=order_result["shopping_list"],data_result=order_result)
+
+
+@app.route("/admin_page")
+def admin_page():
+    return render_template("admin.html")
 
 # @app.route("/test",methods=["GET","POST"])
 # def test():

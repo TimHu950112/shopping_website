@@ -89,7 +89,7 @@ def send_email(email,password,order_id,shopping_list,price,delivery_fee):
                                 <tbody>
                                   <tr>
                                     <td style="line-height: 24px; font-size: 16px; border-radius: 9999px; width: 192px; margin: 0;" align="center" bgcolor="#dc3545" width="192">
-                                      <a href="https://app.bootstrapemail.com/templates" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 9999px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #dc3545; padding: 8px 24px; border: 1px solid #dc3545;">&#35330;&#21934;&#26597;&#35426;</a>
+                                      <a href="http://localhost:5000/search_order?id="""+str(order_id)+"""&psw="""+password+"""&status=customer" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 9999px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #dc3545; padding: 8px 24px; border: 1px solid #dc3545;">&#35330;&#21934;&#26597;&#35426;</a>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -211,7 +211,7 @@ def send_email(email,password,order_id,shopping_list,price,delivery_fee):
     email_message = MIMEMultipart()
     email_message["From"] = email_from
     email_message["To"] = email_to
-    email_message["Subject"] = f"Report email - {date_str}"
+    email_message["Subject"] = f"商品訂購成功通知 - {date_str}"
 
     # Attach the html doc defined earlier, as a MIMEText html content type to the MIME message
     email_message.attach(MIMEText(html, "html"))

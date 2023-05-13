@@ -212,49 +212,68 @@ https://templatemo.com/tm-559-zay-shop
                     </table>
                 </div>
                 <div class="row">
-                    <h5 class="text-end pe-md-5 pe-4">運費＄{{delivery_fee}}</h5>
-                    <h5 class="text-end pe-md-5 pe-4">總金額＄{{cost}}</h5>
-                    <p class="text-400 text-center">凡購買商品滿3000元,一箱免運費！未滿3000元，冷凍運費為245元</p>
+                    <h5 class="text-end pe-md-5 pe-4">總金額＄{{data_result['price']}}</h5>
+                    <!-- <p class="text-400 text-center">凡購買商品滿3000元,一箱免運費！未滿3000元，冷凍運費為245元</p> -->
                 </div>
                 <hr size="2px" width="100%">
-                <form action="/finish_buying" method="POST">
+                <form action="">
                     <div class="row px-5 mt-sm-5">
                         <h3 class="text-center mb-4">購買人資料</h3>
                         <div class="col-md-6 col-12">
                             <p class="text-500">手機號碼</p>
                             <div class="form-floating mb-3">
-                                <input type="phone" name="phone" class="form-control" placeholder="">
+                                <input type="phone" name="phone" class="form-control" placeholder="" value="{{data_result['phone']}}" disabled>
                                 <label>請輸入手機號碼</label>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <p class="text-500">電子郵件</p>
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="">
+                                <input type="email" name="email" class="form-control" placeholder=""  value="{{data_result['email']}}" disabled>
                                 <label>請輸入電子郵件</label>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <p class="text-500">寄送地址</p>
                             <div class="form-floating mb-3">
-                                <input type="address" name="address"  class="form-control" placeholder="">
+                                <input type="address" name="address"  class="form-control" placeholder=""  value="{{data_result['address']}}" disabled>
                                 <label>寄送地址</label>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <p class="text-500">帳號末三碼</p>
                             <div class="form-floating mb-3">
-                                <input type="account" name="account"  class="form-control" placeholder="">
+                                <input type="account" name="account"  class="form-control" placeholder=""  value="{{data_result['account']}}" disabled>
                                 <label>請輸入帳號末三碼</label>
                             </div>
                         </div>
-                        <button type="sumbit" class="btn btn-success rounded-3 mx-auto mt-4" style="max-width: 500px;">確認購買</button>
-
                     </div>
                 </form>
+                <hr size="2px" width="100%">
+                <div class="row px-5 mt-sm-5">
+                    <h3 class="text-center mb-4">狀態</h3>
+                    <div class="col-md-6 col-12">
+                        <p class="text-500">商品狀態</p>
+                        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 40px;">
+                            {% if data_result['delivery_status']=='準備中'%}
+                            <div class="progress-bar progress-bar-striped progress-bar-animated text-400" style="width: 40%">商品準備中</div>
+                            {% elif data_result['delivery_status']=='已出貨'%}
+                            <div class="progress-bar progress-bar-striped progress-bar-animated text-400" style="width: 100%">商品已出貨</div>
+                            {% endif%}
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 mt-md-0 mt-4">
+                        <p class="text-500">付款狀態(僅供參考)</p>
+                        {% if data_result['pay_status']==0 %}
+                        <p class="btn btn-danger disabled placeholder col-4 text-400" style=" height:40px;">尚未付款</p>
+                        {% elif data_result['pay_status']==1 %}
+                        <p class="btn btn-success disabled placeholder col-4 text-400" style=" height:40px;">完成付款</p>
+                        {% endif %}
+                    </div>
+                </div>
 
             </div>
-        </div>
+        </div> 
     </div>
     <!-- End Content -->
 
