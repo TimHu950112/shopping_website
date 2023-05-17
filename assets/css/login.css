@@ -1,0 +1,77 @@
+body{
+    background-color:white;
+}
+
+.middle-board{
+    max-width: 350px;
+    min-height: 500px;
+    border-radius: 0.5rem;
+    background-color: white;
+    border-top: 15px solid rgb(74, 162, 102);
+    box-shadow: 0 0px 70px rgba(0, 0, 0, 0.1);
+
+}
+
+.middle-board2{
+    max-width: 350px;
+    min-height: 500px;
+    border-radius: 0.5rem;
+    background-color: white;
+    border-top: 15px solid #0bc2f4;
+    box-shadow: 0 0px 70px rgba(0, 0, 0, 0.1);
+}
+
+.middle-board3{
+    max-width: 700px;
+    min-height: 600px;
+    border-radius: 0.5rem;
+    background-color: white;
+    border-top: 15px solid #0bc2f4;
+    box-shadow: 0 0px 70px rgba(0, 0, 0, 0.1);
+}
+
+input {
+    border-style:solid;
+    height:50px;
+  }
+
+#style{
+    border-radius: 5px;
+    color: rgb(74, 162, 102);
+}
+
+#style2{
+    border-radius: 5px;
+    color: #0bc2f4;
+}
+
+.submit{
+    border-radius: 0.5rem;
+    width:230px;
+    color:white;
+    background-color: rgb(74, 162, 102);
+}
+
+.submit2{
+    border-radius: 0.5rem;
+    width:230px;
+    color:white;
+    background-color:  #0bc2f4;
+}
+
+
+
+.h6{
+    text-decoration: none;
+    color:darkgray
+}
+.h6:hover{
+    text-decoration: none;
+    color:gray;
+    font-size:17px;
+}
+
+.price{
+    max-width: 50px;
+    
+}

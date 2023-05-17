@@ -3,16 +3,32 @@ from imp import reload
 from dotenv import load_dotenv
 from send_email import send_email
 from datetime import date,datetime
-import pymongo,certifi,os,random,string,pytz
+import pymongo,certifi,os,random,string,pytz,requests
 
 load_dotenv()
 client=pymongo.MongoClient("mongodb+srv://"+os.getenv("mongodb")+".rpebx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",tlsCAFile=certifi.where())
 db=client.shop
 
-class Test:
-    def _init_(self):
-        pass
+class System:
+    def check_function():
+        collection=db.system
+        result=list(collection.find({}))
+        return result
 
+class Admin:
+    def login(email,password):
+        collection=db.admin
+        result=collection.find_one({
+            "$and":[
+                {"email":email},
+                {"password":password}
+            ]
+        })
+        print("result",result)
+        if result==None:
+            return False
+        return result["nickname"]
+    
 class Product:
     def __init__(self,id,name,price,size,photo,introduction,categories,inventory,disable):
         self.id=id
@@ -40,11 +56,12 @@ class Product:
     def delete():
         pass
 
+
+
 class Order:
     def update(phone,email,address,account,price,shopping_list,delivery_fee):
         collection=db.order
-        # order_id=list(collection.find({},{"order_id":1}).sort("order_id",-1))[0]["order_id"]+1
-        order_id=0
+        order_id=list(collection.find({},{"order_id":1}).sort("order_id",-1))[0]["order_id"]+1
         letters = string.ascii_uppercase + string.digits
         password= ''.join(random.choice(letters) for i in range(5))
         date=datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d').split("-")
@@ -63,6 +80,7 @@ class Order:
             "disable":0
         })
         send_email(email,password,order_id,shopping_list,price,delivery_fee)
+        Order.notify("\n【編號】"+str(order_id)+"\n商品訂購成功\n查看連結:http://localhost:5000/search_order?id="+str(order_id)+"&psw="+password+"&status=customer")
 
     def search(order_id,password):
         collection=db.order
@@ -73,5 +91,52 @@ class Order:
             ]
         }))[0]
         return result
+    
+    def not_paid():
+        collection=db.order
+        result=list(collection.find({"$and":[{"pay_status":0},{"disable":0}]}))
+        return result
+    
+    def paid():
+        collection=db.order
+        result=list(collection.find({"$and":[{"pay_status":1},{"delivery_status":"準備中"},{"disable":0}]}))
+        return result
+    
+    def delivery():
+        collection=db.order
+        result=list(collection.find({"$and":[{"delivery_status":"寄送中"},{"disable":0}]}))
+        return result
+    
+    def finish(order_id):
+        collection=db.order
+        collection.update_one({
+        "order_id":int(order_id)},
+        {"$set":{"disable":1}})
+    
+    def check_paid(order_id):
+        collection=db.order
+        collection.update_one({
+        "order_id":int(order_id)},
+        {"$set":{"pay_status":1}})
+
+    def check_delivery(order_id):
+        collection=db.order
+        collection.update_one({
+        "order_id":int(order_id)},
+        {"$set":{"delivery_status":"寄送中"}})
+
+    def check_delivery(order_id):
+        collection=db.order
+        collection.update_one({
+        "order_id":int(order_id)},
+        {"$set":{"delivery_status":"訂單完成","disable":1}})
+    
+    def notify(mesaage):
+        token = os.getenv("line_notify")
+        headers = { "Authorization": "Bearer " + token }
+        data = { 'message': mesaage }
+        requests.post("https://notify-api.line.me/api/notify",
+            headers = headers, data = data)
+
         
 

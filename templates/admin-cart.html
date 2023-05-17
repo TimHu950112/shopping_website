@@ -255,10 +255,10 @@ https://templatemo.com/tm-559-zay-shop
                     <div class="col-md-6 col-12">
                         <p class="text-500">商品狀態</p>
                         <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 40px;">
-                            {% if data_result['delivery_status']=='準備中'%}
+                            {% if data_result['delivery_status']=='準備中' %}
                             <div class="progress-bar progress-bar-striped progress-bar-animated text-400" style="width: 40%">商品準備中</div>
-                            {% elif data_result['delivery_status']=='已出貨'%}
-                            <div class="progress-bar progress-bar-striped progress-bar-animated text-400" style="width: 100%">商品已出貨</div>
+                            {% elif data_result['delivery_status']=='寄送中' %}
+                            <div class="progress-bar progress-bar-striped progress-bar-animated text-400" style="width: 70%">商品寄送中</div>
                             {% endif%}
                         </div>
                     </div>

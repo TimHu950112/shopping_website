@@ -204,87 +204,43 @@ https://templatemo.com/tm-559-zay-shop
 
     <!-- Start Content -->
     <div class="container py-5" style="height: 90vh;">
-        <h3 class="text-center">待審核付款</h3>
+        <h3 class="text-center">網站功能列表</h3>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-9">
-                <div class="row" style="max-height:700px !important;overflow-y:scroll;">
+                <div class="row" style="max-height:600px !important;overflow-y:scroll;">
                     <table class="table table-borderless">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">訂購時間</th>
-                                <th scope="col">電話號碼</th>
-                                <th scope="col">帳號末三碼</th>
-                                <th scope="col">付款按鈕</th>
+                                <th scope="col">功能名稱</th>
+                                <th scope="col">開通時間</th>
+                                <th scope="col">到期時間</th>
+                                <th scope="col">功能狀態</th>
+                                <th scope="col">定價</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in range(0,not_paid_len) %}
+                            {% for i in range(0,website_functions_len) %}
                             <tr>
-                                <th scope="row" onclick="location.href='/'">{{i+1}}</th>
-                                <td onclick="location.href=`/search_order?id={{not_paid[i]['order_id']}}&psw={{not_paid[i]['password']}}&status=admin`">{{not_paid[i]["date"][0]}}/{{not_paid[i]["date"][1]}}/{{not_paid[i]["date"][2]}}</td>
-                                <td onclick="location.href=`/search_order?id={{not_paid[i]['order_id']}}&psw={{not_paid[i]['password']}}&status=admin`">{{not_paid[i]["phone"]}}</td>
-                                <td onclick="location.href=`/search_order?id={{not_paid[i]['order_id']}}&psw={{not_paid[i]['password']}}&status=admin`">{{not_paid[i]["account"]}}</td>
-                                <td><button class="btn btn-secondary" onclick="location.href=`/check_paid?id={{not_paid[i]['order_id']}}`">確認付款</button></td>
+                                <th scope="row">{{i+1}}</th>
+                                <th>{{website_functions[i]['name']}}</th>
+                                <th>{{website_functions[i]['start_time']}}</th>
+                                <th>{{website_functions[i]['expiration_date']}}</th>
+                                {% if website_functions[i]['status']==1 %}
+                                <th><p class="btn btn-success">已開通</p></th>
+                                {% elif website_functions[i]['status']==0 %}
+                                <th><p class="btn btn-danger">未開通</p></th>
+                                {% endif %}
+                                <th>{{website_functions[i]['cost']}}</th>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
                 <hr size="2px" width="100%">
-                <h3 class="text-center">待出貨</h3>
-                <div class="row" style="max-height:700px !important;overflow-y:scroll;">
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">訂購時間</th>
-                                <th scope="col">電話號碼</th>
-                                <th scope="col">帳號末三碼</th>
-                                <th scope="col">出貨按鈕</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for i in range(0,paid_len) %}
-                            <tr>
-                                <th scope="row" onclick="location.href='/'">{{i+1}}</th>
-                                <td onclick="location.href=`/search_order?id={{paid[i]['order_id']}}&psw={{paid[i]['password']}}&status=admin`">{{paid[i]["date"][0]}}/{{paid[i]["date"][1]}}/{{paid[i]["date"][2]}}</td>
-                                <td onclick="location.href=`/search_order?id={{paid[i]['order_id']}}&psw={{paid[i]['password']}}&status=admin`">{{paid[i]["phone"]}}</td>
-                                <td onclick="location.href=`/search_order?id={{paid[i]['order_id']}}&psw={{paid[i]['password']}}&status=admin`">{{paid[i]["account"]}}</td>
-                                <td><button class="btn btn-secondary" onclick="location.href=`/check_delivery?id={{paid[i]['order_id']}}`">確認寄出</button></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <div class="row mt-2 mb-5">
+                    <h3 class="text-center mt-2">當月應付金額:500元</h3>
                 </div>
-
-                <hr size="2px" width="100%">
-                <h3 class="text-center">訂單已寄出</h3>
-                <div class="row" style="max-height:700px !important;overflow-y:scroll;">
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">訂購時間</th>
-                                <th scope="col">電話號碼</th>
-                                <th scope="col">帳號末三碼</th>
-                                <th scope="col">出貨按鈕</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for i in range(0,delivery_len) %}
-                            <tr>
-                                <th scope="row" onclick="location.href='/'">{{i+1}}</th>
-                                <td onclick="location.href=`/search_order?id={{delivery[i]['order_id']}}&psw={{delivery[i]['password']}}&status=admin`">{{delivery[i]["date"][0]}}/{{delivery[i]["date"][1]}}/{{delivery[i]["date"][2]}}</td>
-                                <td onclick="location.href=`/search_order?id={{delivery[i]['order_id']}}&psw={{delivery[i]['password']}}&status=admin`">{{delivery[i]["phone"]}}</td>
-                                <td onclick="location.href=`/search_order?id={{delivery[i]['order_id']}}&psw={{delivery[i]['password']}}&status=admin`">{{delivery[i]["account"]}}</td>
-                                <td><button class="btn btn-secondary" onclick="location.href=`/check_arrived?id={{delivery[i]['order_id']}}`">完成訂單</button></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
             </div>
         </div>
     </div>
@@ -409,13 +365,6 @@ https://templatemo.com/tm-559-zay-shop
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
         </script>
-    <script>
-        {%with messages = get_flashed_messages() %}
-        {% for i in messages %}
-        alert("{{i}}");
-        {% endfor %}
-        {% endwith %}
-    </script>
     <!-- End Script -->
 </body>
 

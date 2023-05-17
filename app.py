@@ -24,6 +24,11 @@ app=Flask(
 )
 app.secret_key="any string"
 shopping_dict=[""]
+
+
+
+        
+    
 @app.route("/")
 def index():
     related_product_list=[]
@@ -152,7 +157,10 @@ def clear():
 
 @app.route("/search_order")
 def search_order():
-    order_result=Order.search(request.args.get("id"),request.args.get("psw"))
+    try:
+        order_result=Order.search(request.args.get("id"),request.args.get("psw"))
+    except:
+        return redirect("/error?msg=發生錯誤，請稍後再試")
     if request.args.get("status")=="customer":
         return render_template("order-cart.html",shopping_list=order_result["shopping_list"],data_result=order_result)
     else:
@@ -161,8 +169,95 @@ def search_order():
 
 @app.route("/admin_page")
 def admin_page():
-    return render_template("admin.html")
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    not_paid=Order.not_paid()
+    paid=Order.paid()
+    delivery=Order.delivery()
+    return render_template("admin.html",nickname=session["member_data"]["nickname"],not_paid=not_paid,paid=paid,delivery=delivery,not_paid_len=len(not_paid),paid_len=len(paid),delivery_len=len(delivery))
 
+@app.route("/function",methods=["POST"])
+def function():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    try:
+        result=request.form["function"]
+    except:
+        flash("請選擇功能")
+        return redirect("/admin_page")
+    if result=="order-list":
+        return redirect("/admin_page")
+    elif result=="website-function":
+        return redirect("/website_function")
+    elif result=="logout":
+        session.clear()
+        return redirect("/error?msg=登出成功")
+    
+@app.route("/check_paid")
+def check_paid():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    Order.check_paid(request.args.get("id"))
+    flash("付款成功")
+    return redirect("/admin_page")
+
+@app.route("/check_delivery")
+def check_delivery():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    Order.check_delivery(request.args.get("id"))
+    flash("寄送成功")
+    return redirect("/admin_page")
+
+@app.route("/check_arrived")
+def check_arrived():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    Order.finish(request.args.get("id"))
+    flash("完成訂單")
+    return redirect("/admin_page")
+
+@app.route("/login_page")
+def login_page():
+    if "member_data" in session:
+        return redirect("/admin_page")
+    return render_template("login.html")
+
+@app.route("/login",methods=["GET","POST"])
+def login():
+    result=Admin.login(request.form["email"],request.form["password"])
+    if result == False:
+        Order.notify("\n"+ "【帳號密碼輸入錯誤】")
+        flash("帳號或密碼錯誤")
+        return render_template("login.html")
+    session["member_data"]={"email":request.form["email"],"password":request.form["password"],"nickname":result}
+    return redirect("/admin_page")
+
+@app.route("/logout")
+def logout():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    session.clear()
+
+@app.route("/website_function")
+def website_function():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    website_functions=System.check_function()
+    return render_template("website-function.html",website_functions=website_functions,website_functions_len=len(website_functions),nickname=session["member_data"]["nickname"])
+
+
+
+@app.route("/error")
+def error():
+    return render_template("error.html",message=["系統提示",request.args.get("msg")])
 # @app.route("/test",methods=["GET","POST"])
 # def test():
 #     if request.is_json:

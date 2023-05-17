@@ -24,8 +24,8 @@ print('\x1b[6;30;42m' + '資料庫連線成功'.center(87) + '\x1b[0m')
 #     "categories":"鴨",
 #     "inventory":[0,0],
 #     "disable":0
-# })
-collection=db.order
+# })]
+
 # collection.insert_one({
 #     "order_id":2,
 #     "phone":"0958058578",
@@ -38,6 +38,22 @@ collection=db.order
 #     "pay_status":0,
 #     "disable":0
 # })
-print(list(collection.find({},{"order_id":1}).sort("order_id",-1))[0]["order_id"]+1)
+
+# collection=db.admin
+# collection.insert_one({
+#     "nickname":"廷鋒",
+#     "email":"admin",
+#     "password":"admin"
+# })
+collection=db.system
+collection.insert_one({
+    "name":"商品評價功能",
+    "start_time":"0000-00-00",
+    "expiration_date":"0000-00-00",
+    "status":0,
+    "cost":"0元/月",
+})
+
+# print(list(collection.find({},{"order_id":1}).sort("order_id",-1))[0]["order_id"]+1)
 
 # print(list(list(collection.find())[0].items()))
