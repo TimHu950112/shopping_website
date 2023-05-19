@@ -122,10 +122,7 @@ $(document).ready(function () {
             
 
     })
-
-    
 });
-
 
 
 

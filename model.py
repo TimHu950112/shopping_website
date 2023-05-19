@@ -24,7 +24,7 @@ class Admin:
                 {"password":password}
             ]
         })
-        print("result",result)
+        # print("result",result)
         if result==None:
             return False
         return result["nickname"]
@@ -42,19 +42,36 @@ class Product:
         self.disable=disable
     def get_inform(text,id):
         collection=db.product
-        result=collection.find_one({"_id":int(id)})
+        result=collection.find_one({"$and":[{"_id":int(id)},{"disable":0}]})
+        if result==None:
+            return None
         for i in range(0,len(result["size"])):
             if result["size"][i] == text:
                 break
+        # print(result,i)
         return (result,i)
     def get_photo(id):
         collection=db.product
         return collection.find_one({"_id":int(id)})["photo"]
         
-    def update():
-        pass
-    def delete():
-        pass
+    def update(id,name,price,size,photo,introduction,categories,inventory):
+        collection=db.product
+        collection.insert_one({
+            "_id":int(id),
+            "name":name,
+            "price":price.split(" "),
+            "size":size.split(" "),
+            "photo":photo,
+            "introduction":introduction,
+            "categories":categories,
+            "inventory":inventory.split(" "),
+            "disable":0
+        })
+    def delete(id):
+        collection=db.product
+        collection.update_one({
+        "_id":int(id)},
+        {"$set":{"disable":1}})
 
 
 

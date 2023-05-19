@@ -22,7 +22,7 @@ app=Flask(
     static_folder="assets",
     static_url_path="/assets"
 )
-app.secret_key="any string"
+app.secret_key=os.getenv("secret_key")
 shopping_dict=[""]
 
 
@@ -33,7 +33,7 @@ shopping_dict=[""]
 def index():
     related_product_list=[]
     collection=db.product
-    product_result=list(collection.find())
+    product_result=list(collection.find({"disable":0}))
     for i in product_result:
         related_product_list.append(Product(i["_id"],i["name"],i["price"],i["size"],i["photo"],i["introduction"],i["categories"],i["inventory"],i["disable"]))
         if len(related_product_list)>=3:
@@ -51,11 +51,11 @@ def shop_page():
     product_list=[]
     if not request.args.get("categories"):
         collection=db.product
-        product_result=list(collection.find())
+        product_result=list(collection.find({"disable":0}))
         page_number=math.ceil(len(product_result)/9)
     else:
         collection=db.product
-        product_result=list(collection.find({"categories":request.args.get("categories")}))
+        product_result=list(collection.find({"$and":[{"categories":request.args.get("categories")},{"disable":0}]}))
         page_number=math.ceil(len(product_result)/9)
 
     if not request.args.get("page"):
@@ -64,7 +64,7 @@ def shop_page():
         current_page=int(request.args.get("page"))
     items=0
     for i in product_result:
-        print(current_page*9,current_page*9-9,items)
+        # print(current_page*9,current_page*9-9,items)
         if items<current_page*9 and items>=current_page*9-9:
             product_list.append(Product(i["_id"],i["name"],i["price"],i["size"],i["photo"],i["introduction"],i["categories"],i["inventory"],i["disable"]))
         items+=1
@@ -80,11 +80,13 @@ def shop_single():
     
     #get_each_product_page
     result=Product.get_inform(request.args.get("size"),request.args.get("id"))
+    if result==None:
+        return redirect("/error?msg=商品已不存在")
     focus_item=Product(result[0]["_id"],result[0]["name"],result[0]["price"][result[1]],result[0]["size"][result[1]],result[0]["photo"],result[0]["introduction"],result[0]["categories"],result[0]["inventory"],result[0]["disable"])
     
     related_product_list=[]
     collection=db.product
-    product_result=list(collection.find())
+    product_result=list(collection.find({"disable":0}))
     for i in product_result:
         related_product_list.append(Product(i["_id"],i["name"],i["price"],i["size"],i["photo"],i["introduction"],i["categories"],i["inventory"],i["disable"]))
         if len(related_product_list)>8:
@@ -110,8 +112,8 @@ def get_cart():
     
 @app.route("/delete_cart")
 def delete_cart():
-    print(session["shopping_list_python"])
-    print(request.args.get("name"))
+    # print(session["shopping_list_python"])
+    # print(request.args.get("name"))
     for i in range(0,len(session["shopping_list_python"])):
         if session["shopping_list_python"][i]["name"]==request.args.get("name"):
             del session["shopping_list_python"][i]
@@ -126,7 +128,7 @@ def buy():
     except:
         print("IM")
         return render_template("error.html",message=["您的購物車沒有商品","快把喜歡的商品帶回家～"])
-    print(session["shopping_list_python"])
+    # print(session["shopping_list_python"])
     shopping_list=session["shopping_list_python"]
     number=0
     cost=0
@@ -189,6 +191,10 @@ def function():
         return redirect("/admin_page")
     if result=="order-list":
         return redirect("/admin_page")
+    elif result=="add-product":
+        return redirect("/add_product_page")
+    elif result=="manage-product":
+        return redirect("/manage_product_page")
     elif result=="website-function":
         return redirect("/website_function")
     elif result=="logout":
@@ -255,6 +261,66 @@ def website_function():
 
 
 
+@app.route("/add_product_page")
+def add_product_page():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    collection=db.product
+    product_id=int(list(collection.find({},{"_id":1}).sort("_id",-1))[0]["_id"])+1
+    return render_template("add-product.html",product_id=product_id)
+
+@app.route("/add_product",methods=["POST"])
+def add_product():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    Product.update(request.form["_id"],request.form["product_name"],request.form["price"],request.form["size"],session["photo"],request.form["introduction"],request.form["categories"],request.form["inventory"])
+    flash("產品新增成功")
+    return redirect("/add_product_page")
+
+@app.route("/upload_image")
+def upload_image():
+    if request.is_json:
+        session["photo"]=request.args.get("image_url")
+        return "圖片上傳成功"
+
+@app.route("/manage_product_page")
+def manage_product_page():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    #get_product_list_page
+    product_list=[]
+    if not request.args.get("categories"):
+        collection=db.product
+        product_result=list(collection.find({"disable":0}))
+        page_number=math.ceil(len(product_result)/9)
+    else:
+        collection=db.product
+        product_result=list(collection.find({"$and":[{"categories":request.args.get("categories")},{"disable":0}]}))
+        page_number=math.ceil(len(product_result)/9)
+
+    if not request.args.get("page"):
+        current_page=1
+    else:
+        current_page=int(request.args.get("page"))
+    items=0
+    for i in product_result:
+        # print(current_page*9,current_page*9-9,items)
+        if items<current_page*9 and items>=current_page*9-9:
+            product_list.append(Product(i["_id"],i["name"],i["price"],i["size"],i["photo"],i["introduction"],i["categories"],i["inventory"],i["disable"]))
+        items+=1
+    return render_template("manage-product.html",product_list=product_list,page_number=page_number,current_page=current_page)
+
+@app.route("/delete")
+def delete():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    Product.delete(request.args.get("id"))
+    flash("刪除成功")
+    return redirect("/manage_product_page")
 @app.route("/error")
 def error():
     return render_template("error.html",message=["系統提示",request.args.get("msg")])
