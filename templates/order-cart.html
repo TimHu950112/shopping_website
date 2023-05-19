@@ -265,9 +265,9 @@ https://templatemo.com/tm-559-zay-shop
                     <div class="col-md-6 col-12 mt-md-0 mt-4">
                         <p class="text-500">付款狀態(僅供參考)</p>
                         {% if data_result['pay_status']==0 %}
-                        <p class="btn btn-danger disabled placeholder col-4 text-400" style=" height:40px;">尚未付款</p>
+                        <p class="btn btn-danger disabled placeholder col-4 text-400" style=" height:40px; min-width:200px;">尚未付款</p>
                         {% elif data_result['pay_status']==1 %}
-                        <p class="btn btn-success disabled placeholder col-4 text-400" style=" height:40px;">完成付款</p>
+                        <p class="btn btn-success disabled placeholder col-4 text-400" style=" height:40px; min-width:200px;">完成付款</p>
                         {% endif %}
                     </div>
                 </div>
