@@ -39,20 +39,20 @@ print('\x1b[6;30;42m' + '資料庫連線成功'.center(87) + '\x1b[0m')
 #     "disable":0
 # })
 
-# collection=db.admin
-# collection.insert_one({
-#     "nickname":"廷鋒",
-#     "email":"admin",
-#     "password":"admin"
-# })
-collection=db.system
+collection=db.admin
 collection.insert_one({
-    "name":"商品評價功能",
-    "start_time":"0000-00-00",
-    "expiration_date":"0000-00-00",
-    "status":0,
-    "cost":"0元/月",
+    "nickname":"使用者",
+    "email":"20230520",
+    "password":"taiwan"
 })
+# collection=db.system
+# collection.insert_one({
+#     "name":"RWD響應式網站",
+#     "start_time":"2023-05-17",
+#     "expiration_date":"2033-05-17",
+#     "status":1,
+#     "cost":"0元/月",
+# })
 
 # print(list(collection.find({},{"order_id":1}).sort("order_id",-1))[0]["order_id"]+1)
 

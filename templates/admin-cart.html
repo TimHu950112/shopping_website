@@ -259,6 +259,8 @@ https://templatemo.com/tm-559-zay-shop
                             <div class="progress-bar progress-bar-striped progress-bar-animated text-400" style="width: 40%">商品準備中</div>
                             {% elif data_result['delivery_status']=='寄送中' %}
                             <div class="progress-bar progress-bar-striped progress-bar-animated text-400" style="width: 70%">商品寄送中</div>
+                            {% elif data_result['delivery_status']=='訂單完成' %}
+                            <div class="progress-bar progress-bar-striped progress-bar-animated text-400" style="width: 100%">訂單完成</div>
                             {% endif%}
                         </div>
                     </div>

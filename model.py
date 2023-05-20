@@ -12,7 +12,7 @@ db=client.shop
 class System:
     def check_function():
         collection=db.system
-        result=list(collection.find({}))
+        result=list(collection.find({}).sort("status",-1))
         return result
 
 class Admin:
@@ -124,11 +124,6 @@ class Order:
         result=list(collection.find({"$and":[{"delivery_status":"寄送中"},{"disable":0}]}))
         return result
     
-    def finish(order_id):
-        collection=db.order
-        collection.update_one({
-        "order_id":int(order_id)},
-        {"$set":{"disable":1}})
     
     def check_paid(order_id):
         collection=db.order
@@ -142,7 +137,7 @@ class Order:
         "order_id":int(order_id)},
         {"$set":{"delivery_status":"寄送中"}})
 
-    def check_delivery(order_id):
+    def finish(order_id):
         collection=db.order
         collection.update_one({
         "order_id":int(order_id)},
