@@ -2,7 +2,5 @@ flask
 python-dotenv 
 pymongo
 datetime
-random
-string
 pytz
 requests
