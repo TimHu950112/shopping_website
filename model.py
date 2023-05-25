@@ -94,8 +94,11 @@ class Order:
             "pay_status":0,
             "disable":0
         })
+        print("ep",email,password)
+        print("os",order_id,shopping_list)
+        print("pd",price,delivery_fee)
         send_email(email,password,order_id,shopping_list,price,delivery_fee)
-        Order.notify("\n【編號】"+str(order_id)+"\n商品訂購成功\n查看連結:http://localhost:5000/search_order?id="+str(order_id)+"&psw="+password+"&status=customer")
+        Order.notify("\n【編號】"+str(order_id)+"\n商品訂購成功\n查看連結:https://"+os.getenv("website")+"search_order?id="+str(order_id)+"&psw="+password+"&status=customer")
 
     def search(order_id,password):
         collection=db.order
