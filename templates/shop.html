@@ -51,36 +51,36 @@ https://templatemo.com/tm-559-zay-shop
 
     <!-- modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">購物車內容</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">品項</th>
-                        <th scope="col">價格</th>
-                        <th scope="col">數量</th>
-                        <th scope="col">小計</th>
-                        <th scope="col">刪除鈕</th>
-                      </tr>
-                    </thead>
-                    <tbody id="shopping_cart">
-                    </tbody>
-                  </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                <button type="button" class="btn btn-success" onclick="location.href='/buy'">購買</button>
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">購物車內容</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">品項</th>
+                                <th scope="col">價格</th>
+                                <th scope="col">數量</th>
+                                <th scope="col">小計</th>
+                                <th scope="col">刪除鈕</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shopping_cart">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-success" onclick="location.href='/buy'">購買</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- end-modal -->
+    <!-- end-modal -->
 
 
     <!-- Header -->
@@ -127,10 +127,11 @@ https://templatemo.com/tm-559-zay-shop
                     <!-- <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a> -->
-                    <a class="nav-icon position-relative text-decoration-none" id="shopping_number" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <a class="nav-icon position-relative text-decoration-none" id="shopping_number"
+                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span
-                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark" >0</span>
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="/login_page">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
@@ -310,148 +311,32 @@ https://templatemo.com/tm-559-zay-shop
     </div>
     <!-- End Content -->
 
-    <!-- Start Brands -->
-    <section class="bg-light py-5">
-        <div class="container my-4">
-            <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="h1 text-500">各通路連結</h1>
-                    <p class="text-400">
-                        通路介紹
-                    </p>
+
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">擄味滷味</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            新北市三重區重陽路一段146號
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none" href="tel:02-29872966">(02)2987-2966</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none" href="mailto:LV29872966@gmail.com">LV29872966@gmail.com</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-lg-9 m-auto tempaltemo-carousel">
-                    <div class="row d-flex flex-row">
-                        <!--Controls-->
-                        <div class="col-1 align-self-center">
-                            <a class="h1" href="#multi-item-example" role="button" data-bs-slide="prev">
-                                <i class="text-light fas fa-chevron-left"></i>
-                            </a>
-                        </div>
-                        <!--End Controls-->
 
-                        <!--Carousel Wrapper-->
-                        <div class="col">
-                            <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
-                                data-bs-ride="carousel">
-                                <!--Slides-->
-                                <div class="carousel-inner product-links-wap" role="listbox">
-
-                                    <!--First slide-->
-                                    <div class="carousel-item active">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End First slide-->
-
-                                    <!--Second slide-->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End Second slide-->
-
-                                    <!--Third slide-->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End Third slide-->
-
-                                </div>
-                                <!--End Slides-->
-                            </div>
-                        </div>
-                        <!--End Carousel Wrapper-->
-
-                        <!--Controls-->
-                        <div class="col-1 align-self-center">
-                            <a class="h1" href="#multi-item-example" role="button" data-bs-slide="next">
-                                <i class="text-light fas fa-chevron-right"></i>
-                            </a>
-                        </div>
-                        <!--End Controls-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--End Brands-->
-
-
-        <!-- Start Footer -->
-        <footer class="bg-dark" id="tempaltemo_footer">
-            <div class="container">
-                <div class="row">
-    
-                    <div class="col-md-4 pt-5">
-                        <h2 class="h2 text-success border-bottom pb-3 border-light logo">擄味滷味</h2>
-                        <ul class="list-unstyled text-light footer-link-list">
-                            <li>
-                                <i class="fas fa-map-marker-alt fa-fw"></i>
-                                新北市三重區重陽路一段146號
-                            </li>
-                            <li>
-                                <i class="fa fa-phone fa-fw"></i>
-                                <a class="text-decoration-none" href="tel:02-29872966">(02)2987-2966</a>
-                            </li>
-                            <li>
-                                <i class="fa fa-envelope fa-fw"></i>
-                                <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
-                            </li>
-                        </ul>
-                    </div>
-    
-                    <div class="col-md-4 pt-5">
-                        <!-- <h2 class="h2 text-light border-bottom pb-3 border-light" style="font-weight:400 !important;">產品分類</h2>
+                <div class="col-md-4 pt-5">
+                    <!-- <h2 class="h2 text-light border-bottom pb-3 border-light" style="font-weight:400 !important;">產品分類</h2>
                         <ul class="list-unstyled text-light footer-link-list">
                             <li><a class="text-decoration-none" href="#">Luxury</a></li>
                             <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
@@ -461,68 +346,75 @@ https://templatemo.com/tm-559-zay-shop
                             <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
                             <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
                         </ul> -->
-                    </div>
-    
-                    <div class="col-md-4 pt-5">
-                        <h2 class="h2 text-light border-bottom pb-3 border-light" style="font-weight:400 !important;">更多資訊
-                        </h2>
-                        <ul class="list-unstyled text-light footer-link-list">
-                            <li><a class="text-decoration-none" href="/" style="font-weight:400 !important;">首頁</a></li>
-                            <li><a class="text-decoration-none" href="#about_us" style="font-weight:400 !important;">關於我們</a></li>
-                            <li><a class="text-decoration-none" href="#about_us" style="font-weight:400 !important;">商店資訊</a></li>
-                            <li><a class="text-decoration-none" href="#about_us" style="font-weight:400 !important;">聯絡我們</a></li>
-                        </ul>
-                    </div>
-    
                 </div>
-    
-                <div class="row text-light mb-4" id="about_us">
-                    <div class="col-12 mb-3">
-                        <div class="w-100 my-3 border-top border-light"></div>
-                    </div>
-                    <div class="col-auto me-auto">
-                        <ul class="list-inline text-left footer-icons">
-                            <li class="list-inline-item border border-light rounded-circle text-center">
-                                <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i
-                                        class="fab fa-facebook-f fa-lg fa-fw"></i></a>
-                            </li>
-                            <li class="list-inline-item border border-light rounded-circle text-center">
-                                <a class="text-light text-decoration-none" target="_blank"
-                                    href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
-                            </li>
-                            <li class="list-inline-item border border-light rounded-circle text-center">
-                                <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i
-                                        class="fab fa-twitter fa-lg fa-fw"></i></a>
-                            </li>
-                            <li class="list-inline-item border border-light rounded-circle text-center">
-                                <a class="text-light text-decoration-none" target="_blank"
-                                    href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- <div class="col-auto">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light" style="font-weight:400 !important;">
+                        更多資訊
+                    </h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="/" style="font-weight:400 !important;">首頁</a></li>
+                        <li><a class="text-decoration-none" href="#about_us"
+                                style="font-weight:400 !important;">關於我們</a></li>
+                        <li><a class="text-decoration-none" href="#about_us"
+                                style="font-weight:400 !important;">商店資訊</a></li>
+                        <li><a class="text-decoration-none" href="#about_us"
+                                style="font-weight:400 !important;">聯絡我們</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row text-light mb-4" id="about_us">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.facebook.com/people/%E6%93%84%E5%91%B3%E6%BB%B7%E5%91%B3-Lo-Vi/100084004730683/?mibextid=ZbWKwL"><i
+                                    class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.instagram.com/luway_lu/"><i
+                                    class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <!-- <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i
+                                    class="fab fa-twitter fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                        </li> -->
+                    </ul>
+                </div>
+                <!-- <div class="col-auto">
                         <label class="sr-only" for="subscribeEmail">Email address</label>
                         <div class="input-group mb-2">
                             <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
                             <div class="input-group-text btn-success text-light">Subscribe</div>
                         </div>
                     </div> -->
-                </div>
             </div>
-    
-            <div class="w-100 bg-black py-3">
-                <div class="container">
-                    <div class="row pt-2">
-                        <div class="col-12">
-                            <p class="text-left text-light">
-                                Copyright &copy; 2023 <a href="mailto:iterationstudio2022@gmail.com ">Iteration Studio</a>
-                                | Designed by <a rel="sponsored" href="#" target="_blank">TimHu</a>
-                            </p>
-                        </div>
+        </div>
+
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2023 <a href="mailto:iterationstudio2022@gmail.com ">Iteration
+                                Studio</a>
+                            | Designed by <a rel="sponsored" href="#" target="_blank">TimHu</a>
+                        </p>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
     <!-- Start Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
