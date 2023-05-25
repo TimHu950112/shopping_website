@@ -13,7 +13,7 @@ import pandas as pd
 def send_email(email,password,order_id,shopping_list,price,delivery_fee):
     html_text=""
     for i in shopping_list:
-        html_text+="""<tr><td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="left" width="100%">"""+i["name"]+"""數量："""+str(i["number"])+"""</td><td class="text-right" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="right" width="100%">$"""+str(i["price"]*i["number"])+"""</td></tr>"""
+        html_text+="""<tr><td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="left" width="100%">"""+i['name']+"""數量："""+str(i['number'])+"""</td><td class="text-right" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="right" width="100%">$"""+str(i['price']*i['number'])+"""</td></tr>"""
     # Define the HTML document
     html = (
         """
@@ -92,7 +92,7 @@ def send_email(email,password,order_id,shopping_list,price,delivery_fee):
                                 <tbody>
                                   <tr>
                                     <td style="line-height: 24px; font-size: 16px; border-radius: 9999px; width: 192px; margin: 0;" align="center" bgcolor="#dc3545" width="192">
-                                      <a href="https://"""+os.getenv("website")+"""search_order?id="""+str(order_id)+"""&psw="""+password+"""&status=customer" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 9999px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #dc3545; padding: 8px 24px; border: 1px solid #dc3545;">&#35330;&#21934;&#26597;&#35426;</a>
+                                      <a href="https://"""+os.getenv('website')+"""search_order?id="""+str(order_id)+"""&psw="""+password+"""&status=customer" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 9999px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #dc3545; padding: 8px 24px; border: 1px solid #dc3545;">&#35330;&#21934;&#26597;&#35426;</a>
                                     </td>
                                   </tr>
                                 </tbody>

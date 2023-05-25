@@ -145,6 +145,7 @@ def buy():
 @app.route("/finish_buying",methods=["POST"])
 def finish_buying():
     Order.update(request.form.get("phone"),request.form.get("email"),request.form.get("address"),request.form.get("account"),session["cost"],session["shopping_list_python"],session["delivery_fee"])
+    session.clear()
     return render_template("error.html",message=["商品訂購成功","請檢查電子郵件訊息"])
 
 @app.route("/clear")
@@ -318,7 +319,6 @@ def delete():
     return redirect("/manage_product_page")
 @app.route("/error")
 def error():
-    session.clear()
     return render_template("error.html",message=["系統提示",request.args.get("msg")])
 # @app.route("/test",methods=["GET","POST"])
 # def test():
