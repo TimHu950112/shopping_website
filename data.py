@@ -39,9 +39,7 @@ print('\x1b[6;30;42m' + '資料庫連線成功'.center(87) + '\x1b[0m')
 
 collection=db.admin
 collection.insert_one({
-    "nickname":"使用者",
-    "email":"20230520",
-    "password":"taiwan"
+    "":""
 })
 # collection=db.system
 # collection.insert_one({

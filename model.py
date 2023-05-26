@@ -98,6 +98,7 @@ class Order:
         print("os",order_id,shopping_list)
         print("pd",price,delivery_fee)
         send_email(email,password,order_id,shopping_list,price,delivery_fee)
+        print("order_id",str(order_id))
         Order.notify("\n【編號】"+str(order_id)+"\n商品訂購成功\n查看連結:https://"+os.getenv("website")+"search_order?id="+str(order_id)+"&psw="+password+"&status=customer")
 
     def search(order_id,password):
