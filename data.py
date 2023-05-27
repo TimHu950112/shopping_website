@@ -13,8 +13,8 @@ print('\x1b[6;30;42m' + '資料庫連線成功'.center(87) + '\x1b[0m')
 
 # collection=db.product
 # collection.insert_one({
-#     "_id":7,
-#     "name":"test",
+#     "_id":0,
+#     "name":"此為測試商品",
 #     "price":["100","200"],
 #     "size":["normal","special"],
 #     "photo":"https://i.imgur.com/Y5ZjfLh.jpg",
@@ -22,7 +22,7 @@ print('\x1b[6;30;42m' + '資料庫連線成功'.center(87) + '\x1b[0m')
 #     "categories":"鴨",
 #     "inventory":[0,0],
 #     "disable":0
-# })]
+# })
 
 # collection.insert_one({
 #     "order_id":2,
@@ -37,10 +37,10 @@ print('\x1b[6;30;42m' + '資料庫連線成功'.center(87) + '\x1b[0m')
 #     "disable":0
 # })
 
-collection=db.admin
-collection.insert_one({
-    "":""
-})
+# collection=db.admin
+# collection.insert_one({
+#     "":""
+# })
 # collection=db.system
 # collection.insert_one({
 #     "name":"RWD響應式網站",

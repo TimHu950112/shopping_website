@@ -12,7 +12,7 @@ $('.imgur').change(function() {
      'type': 'base64'
      },
      success: fdone,
-     error: function(){alert("failed")},
+     error: function(){alert("圖片上傳失敗，請稍後再試")},
      beforeSend: function (xhr) {
          xhr.setRequestHeader("Authorization", "Client-ID " + clientId);
      }
