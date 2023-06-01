@@ -152,6 +152,8 @@ def send_email(email,password,order_id,shopping_list,price,delivery_fee):
                                         </tr>
                                       </tbody>
                                     </table>
+                                     <p style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">若您尚未付款，請匯款至<br>
+                                      銀行代碼：009(彰化銀行) 帳號：56548604396800</p><br>
                                     <p style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">如對於訂單有任何問題，歡迎致電詢問<br>
                                       我們將會有專人為您服務 <a class="text-decoration-none" href="tel:02-29872966" style="color: #0d6efd;">(02)2987-2966</a></p>
                                   </td>

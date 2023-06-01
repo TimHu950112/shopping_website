@@ -217,42 +217,43 @@ https://templatemo.com/tm-559-zay-shop
                     <p class="text-400 text-center">凡購買商品滿3000元,一箱免運費！未滿3000元，冷凍運費為245元</p>
                 </div>
                 <hr size="2px" width="100%">
-                <form action="/finish_buying" method="POST">
+                <form action="/finish_buying" method="POST" onsubmit ="getElementById('submitInput').disabled=true;return true;" >
                     <div class="row px-5 mt-sm-5">
                         <h3 class="text-center mb-4">購買人資料</h3>
                         <div class="col-md-6 col-12">
                             <p class="text-500">手機號碼</p>
                             <div class="form-floating mb-3">
-                                <input type="phone" name="phone" class="form-control" placeholder="">
+                                <input type="phone" name="phone" class="form-control" placeholder="" required>
                                 <label>請輸入手機號碼</label>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <p class="text-500">電子郵件</p>
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="">
+                                <input type="email" name="email" class="form-control" placeholder="" required>
                                 <label>請輸入電子郵件</label>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <p class="text-500">寄送地址</p>
                             <div class="form-floating mb-3">
-                                <input type="address" name="address"  class="form-control" placeholder="">
+                                <input type="address" name="address"  class="form-control" placeholder="" required>
                                 <label>寄送地址</label>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <p class="text-500">帳號末三碼</p>
                             <div class="form-floating mb-3">
-                                <input type="account" name="account"  class="form-control" placeholder="">
+                                <input type="account" name="account"  class="form-control" placeholder="" required>
                                 <label>請輸入帳號末三碼</label>
                             </div>
                         </div>
-                        <button type="sumbit" class="btn btn-success rounded-3 mx-auto mt-4" style="max-width: 500px;">確認購買</button>
+                        <p class="text-400 text-center">完成購買後，請匯款至</p>
+                        <p class="text-400 text-center">銀行代碼：009（彰化銀行）帳號：56548604396800</p>
+                        <button type="submit" class="btn btn-success rounded-3 mx-auto mt-4" style="max-width: 500px;" id="submitInput">確認購買</button>
 
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

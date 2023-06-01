@@ -204,7 +204,7 @@ https://templatemo.com/tm-559-zay-shop
 
     <!-- Start Content -->
     <div class="container pb-5 pt-md-3 pt-5" style="min-height: 90vh;">
-        <form action="/add_product" method="POST">
+        <form action="/add_product" method="POST" onsubmit ="getElementById('submitInput').disabled=true;return true;"> 
             <div class="row px-5 mt-sm-5 justify-content-center">
                 <h3 class="text-center mb-4">產品管理</h3>
                 <div class="col-md-6 col-12">
@@ -280,7 +280,7 @@ https://templatemo.com/tm-559-zay-shop
                     </div>
                 </div>
                 <div class="col-md-6 col-12 mt-5">
-                    <input type="submit" class="form-control btn btn-success" placeholder="" value="送出">
+                    <input type="submit" class="form-control btn btn-success" placeholder="" value="送出" id="submitInput" >
                 </div>
             </div>
         </form>
