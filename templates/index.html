@@ -358,7 +358,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-warning fa fa-star"></i>
                                 </li>
-                                <li class="text-muted text-right">${{product.price[0]}}</li>
+                                <!-- <li class="text-muted text-right">${{product.price[0]}}</li> -->
                             </ul>
                             <a href="/shop_single?id={{product.id}}&size={{product.size[0]}}"
                                 class="h2 text-decoration-none text-dark">{{product.name}}</a>
@@ -369,6 +369,9 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+            <div class="row justify-content-center mx-5">
+                <button class="btn btn-success btn-lg" onclick="location.href='/shop'">購買更多商品</button>
             </div>
         </div>
     </section>
