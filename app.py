@@ -333,5 +333,13 @@ def error():
 #         # return jsonify(product_result=product_result,length=len(product_result))
 #     return render_template("home.html")
 
+@app.route("/notify")
+def route_notify():
+    if not "member_data" in session:    
+        flash("請先登入")
+        return render_template("login.html")
+    Order.notify(request.args.get('notify'))
+    return "success"
+
 if __name__=='__main__':
     app.run(port=5000,debug=True)
