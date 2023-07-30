@@ -1,16 +1,18 @@
 from flask import*
 from dotenv import load_dotenv
-
-
 from model import *
-
-import pymongo ,certifi,math,os
+from datetime import date,datetime
+import pymongo ,certifi,math,os,pytz
 
 load_dotenv()
 #初始化資料庫連線
 client=pymongo.MongoClient("mongodb+srv://"+os.getenv("mongodb")+".rpebx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",tlsCAFile=certifi.where())
 db=client.shop
 print('\x1b[6;30;42m' + 'x資料庫連線成功'.center(87) + '\x1b[0m')
+
+# LINE 聊天機器人的基本資料
+line_bot_api = LineBotApi(os.getenv('line_access'))
+handler = WebhookHandler(os.getenv('line_secret'))
 
 #初始化 flask 伺服器
 app=Flask(
@@ -340,6 +342,63 @@ def route_notify():
         return render_template("login.html")
     Order.notify(request.args.get('notify'))
     return "success"
+
+#linebot
+# 接收 LINE 的資訊
+@app.route("/callback", methods=['POST'])
+def callback():
+    signature = request.headers['X-Line-Signature']
+
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+
+    return 'OK'
+
+# 學你說話
+@handler.add(MessageEvent, message=TextMessage)
+def echo(event):
+    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+        if event.message.text=='今日貨態查詢':
+            reply=KOFU.search(datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d'))
+            if reply!=False:
+                text='【今日貨態查詢】'
+                text_value=[]
+                for i in reply:
+                    text_value.append([i['date'],i['time'],i['location'],i['product']])
+                for i in text_value:
+                    text+='\n\n【日期】: '+i[0]+'\n【時間】: '+i[1]+'\n【地點】: '+i[2]+'\n【產品與數量】: '+i[3]
+                line_bot_api.reply_message(event.reply_token,TextSendMessage(text))
+            else:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('尚未送達或無訂單'))
+        elif '/送達' in event.message.text:
+            text=event.message.text.split()
+            KOFU.update(text[1],text[2])
+            line_bot_api.broadcast(TextSendMessage('【商品送達通知】\n【日期】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d')+'\n【時間】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%H:%M')+'\n【地點】: ' + text[1] + '\n【產品與數量】: ' + text[2]))
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('登記成功'))
+        elif '-' in event.message.text:
+            try:
+                reply=KOFU.search(event.message.text)
+                if reply!=False:
+                    text='【貨態查詢】'
+                    text_value=[]
+                    for i in reply:
+                        text_value.append([i['date'],i['time'],i['location'],i['product']])
+                    for i in text_value:
+                        text+='\n\n【日期】: '+i[0]+'\n【時間】: '+i[1]+'\n【地點】: '+i[2]+'\n【產品與數量】: '+i[3]
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text))
+                else:
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage('尚未送達或無訂單'))
+            except:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('發生錯誤，請檢查格式'))
+        else:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('很抱歉，您的回覆超出了我的能力範圍'))
+
+
 
 if __name__=='__main__':
     app.run(port=5000,debug=True)

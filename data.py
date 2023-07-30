@@ -1,6 +1,7 @@
 import pymongo
 import certifi
-import os
+import os,pytz
+from datetime import date,datetime
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -10,7 +11,15 @@ client=pymongo.MongoClient("mongodb+srv://"+os.getenv("mongodb")+".rpebx.mongodb
 db=client.shop
 print('\x1b[6;30;42m' + '資料庫連線成功'.center(87) + '\x1b[0m')
 
+collection=db.kofu
+# collection.insert_one({
+#     'date':'2023-07-30',
+#     'time':datetime.now(pytz.timezone('Asia/Taipei')).strftime('%H:%M'),
+#     'location':['2','3'],
+#     'product':['second','third']
+# })
 
+print(list(collection.find({'date':'2023-07-30'})))
 # collection=db.product
 # collection.insert_one({
 #     "_id":0,

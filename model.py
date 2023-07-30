@@ -1,6 +1,10 @@
 from dotenv import load_dotenv
 from send_email import send_email
 from datetime import date,datetime
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from multiprocessing import Process
 import pymongo,certifi,os,random,string,pytz,requests
 
 load_dotenv()
@@ -152,5 +156,21 @@ class Order:
         requests.post("https://notify-api.line.me/api/notify",
             headers = headers, data = data)
 
-        
+class KOFU:
+    def search(date):
+        collection=db.kofu
+        result=list(collection.find({"date":date}))
+        if len(result)!= 0:
+            print(result)
+            return result
+        else:
+            return False
+    def update(location,product):
+        collection=db.kofu
+        collection.insert_one({
+            'date':datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d'),
+            'time':datetime.now(pytz.timezone('Asia/Taipei')).strftime('%H:%M'),
+            'location':location,
+            'product':product
+        })
 
