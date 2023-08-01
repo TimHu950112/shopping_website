@@ -159,7 +159,7 @@ class Order:
 class KOFU:
     def search(date):
         collection=db.kofu
-        result=list(collection.find({"date":date}))
+        result=list(collection.find({"date":date}).sort("zone",1))
         if len(result)!= 0:
             print(result)
             return result
@@ -171,6 +171,7 @@ class KOFU:
             'date':datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d'),
             'time':datetime.now(pytz.timezone('Asia/Taipei')).strftime('%H:%M'),
             'location':location,
+            'zone':location.split('區')[0]+'區',
             'product':product
         })
 

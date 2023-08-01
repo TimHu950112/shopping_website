@@ -368,37 +368,48 @@ def echo(event):
             if reply!=False:
                 text='【今日貨態查詢】'
                 text_value=[]
+                zone=''
                 for i in reply:
-                    text_value.append([i['date'],i['time'],i['location'],i['product']])
+                    text_value.append([i['date'],i['time'],i['location'],i['product'],i['zone']])
                 for i in text_value:
-                    text+='\n\n【日期】: '+i[0]+'\n【時間】: '+i[1]+'\n【地點】: '+i[2]+'\n【產品與數量】: '+i[3]
+                    if i[4]!=zone:
+                        zone=i[4]
+                        text+='\n\n-----------------\n    ✲'+zone+'✲\n-----------------\n【日期】: '+i[0]+'\n【時間】: '+i[1]+'\n【地點】: '+i[2]+'\n【產品與數量】: 芼荷'+i[3]+'對'
+                    else:
+                        text+='\n\n【日期】: '+i[0]+'\n【時間】: '+i[1]+'\n【地點】: '+i[2]+'\n【產品與數量】: 芼荷'+i[3]+'對'
                 line_bot_api.reply_message(event.reply_token,TextSendMessage(text))
             else:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('尚未送達或無訂單'))
         elif '/送達' in event.message.text:
             text=event.message.text.split()
             KOFU.update(text[1],text[2])
-            line_bot_api.broadcast(TextSendMessage('【商品送達通知】\n【日期】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d')+'\n【時間】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%H:%M')+'\n【地點】: ' + text[1] + '\n【產品與數量】: ' + text[2]))
+            line_bot_api.broadcast(TextSendMessage('【商品送達通知】\n【日期】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d')+'\n【時間】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%H:%M')+'\n【地點】: ' + text[1] + '\n【產品與數量】: 芼荷' + text[2]+'對'))
             line_bot_api.reply_message(event.reply_token,TextSendMessage('登記成功'))
         elif '-' in event.message.text:
             try:
                 reply=KOFU.search(event.message.text)
                 if reply!=False:
-                    text='【貨態查詢】'
+                    text='【指定日期貨態查詢】'
                     text_value=[]
+                    zone=''
                     for i in reply:
-                        text_value.append([i['date'],i['time'],i['location'],i['product']])
+                        text_value.append([i['date'],i['time'],i['location'],i['product'],i['zone']])
                     for i in text_value:
-                        text+='\n\n【日期】: '+i[0]+'\n【時間】: '+i[1]+'\n【地點】: '+i[2]+'\n【產品與數量】: '+i[3]
+                        if i[4]!=zone:
+                            zone=i[4]
+                            text+='\n\n-----------------\n    ✲'+zone+'✲\n-----------------\n【日期】: '+i[0]+'\n【時間】: '+i[1]+'\n【地點】: '+i[2]+'\n【產品與數量】: 芼荷'+i[3]+'對'
+                        else:
+                            text+='\n\n【日期】: '+i[0]+'\n【時間】: '+i[1]+'\n【地點】: '+i[2]+'\n【產品與數量】: 芼荷'+i[3]+'對'
                     line_bot_api.reply_message(event.reply_token,TextSendMessage(text))
                 else:
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage('尚未送達或無訂單'))
+                    line_bot_api.reply_message(event.reply_token,TextSendMessage('查無訂單'))
             except:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('發生錯誤，請檢查格式'))
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('很抱歉，您的回覆超出了我的能力範圍'))
+    return 200
 
 
 
 if __name__=='__main__':
-    app.run(port=5000,debug=True)
+    app.run(port=5500,debug=True)
