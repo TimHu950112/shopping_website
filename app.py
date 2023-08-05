@@ -36,7 +36,8 @@ def index():
         related_product_list.append(Product(i["_id"],i["name"],i["price"],i["size"],i["photo"],i["introduction"],i["categories"],i["inventory"],i["disable"]))
         if len(related_product_list)>=3:
             break
-    return render_template("index.html",related_product_list=related_product_list)
+    return '此網站已停用，請聯繫客服'
+    # return render_template("index.html",related_product_list=related_product_list)
 
 @app.route("/shop")
 def shop_page():
