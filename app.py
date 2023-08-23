@@ -384,10 +384,10 @@ def echo(event):
         elif '/送達' in event.message.text:
             text=event.message.text.split()
             KOFU.update(text[1],text[2])
-            # line_bot_api.broadcast(TextSendMessage('【商品送達通知】\n【日期】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d')+'\n【時間】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%H:%M')+'\n【地點】: ' + text[1] + '\n【產品與數量】: 芼荷' + text[2]+'對'))
+            # line_bot_api.broadcast(TextSendMessage(text='【商品送達通知】\n【日期】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%Y-%m-%d')+'\n【時間】:'+datetime.now(pytz.timezone('Asia/Taipei')).strftime('%H:%M')+'\n【地點】: ' + text[1] + '\n【產品與數量】: 芼荷' + text[2]+'對'))
             line_bot_api.reply_message(event.reply_token,TextSendMessage('登記成功'))
         elif '/維護通知' in event.message.text:
-            line_bot_api.broadcast(TextMessage('【系統維護通知】\n 目前系統維護中，將暫時關閉送達通知功能，但您仍可以利用下方貨態查詢按鍵查詢。造成您的不便，敬請見諒'))
+            line_bot_api.broadcast(TextMessage(text='【系統維護通知】\n 目前系統維護中，將暫時關閉送達通知功能，但您仍可以利用下方貨態查詢按鍵查詢。造成您的不便，敬請見諒'))
         elif '-' in event.message.text:
             try:
                 reply=KOFU.search(event.message.text)
