@@ -1,4 +1,4 @@
-import smtplib, ssl , os
+import smtplib, ssl, os
 
 ## email.mime subclasses
 from email.mime.multipart import MIMEMultipart
@@ -10,10 +10,19 @@ load_dotenv()
 ## The pandas library is only for generating the current date, which is not necessary for sending emails
 import pandas as pd
 
-def send_email(email,password,order_id,shopping_list,price,delivery_fee):
-    html_text=""
+
+def send_email(email, password, order_id, shopping_list, price, delivery_fee):
+    html_text = ""
     for i in shopping_list:
-        html_text+="""<tr><td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="left" width="100%">"""+i['name']+"""數量："""+str(i['number'])+"""</td><td class="text-right" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="right" width="100%">$"""+str(i['price']*i['number'])+"""</td></tr>"""
+        html_text += (
+            """<tr><td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="left" width="100%">"""
+            + i["name"]
+            + """數量："""
+            + str(i["number"])
+            + """</td><td class="text-right" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="right" width="100%">$"""
+            + str(i["price"] * i["number"])
+            + """</td></tr>"""
+        )
     # Define the HTML document
     html = (
         """
@@ -92,7 +101,13 @@ def send_email(email,password,order_id,shopping_list,price,delivery_fee):
                                 <tbody>
                                   <tr>
                                     <td style="line-height: 24px; font-size: 16px; border-radius: 9999px; width: 192px; margin: 0;" align="center" bgcolor="#dc3545" width="192">
-                                      <a href="https://"""+os.getenv('website')+"""search_order?id="""+str(order_id)+"""&psw="""+password+"""&status=customer" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 9999px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #dc3545; padding: 8px 24px; border: 1px solid #dc3545;">&#35330;&#21934;&#26597;&#35426;</a>
+                                      <a href="https://"""
+        + os.getenv("website")
+        + """search_order?id="""
+        + str(order_id)
+        + """&psw="""
+        + password
+        + """&status=customer" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 9999px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #dc3545; padding: 8px 24px; border: 1px solid #dc3545;">&#35330;&#21934;&#26597;&#35426;</a>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -115,14 +130,20 @@ def send_email(email,password,order_id,shopping_list,price,delivery_fee):
                                     <p class="text-center text-muted" style="line-height: 24px; font-size: 16px; color: #718096; width: 100%; margin: 0;" align="center">商品明細表</p>
                                     <table class="p-2 w-full" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                       <tbody>
-                                        """+html_text+"""
+                                        """
+        + html_text
+        + """
                                         <tr>
                                           <td class="fw-700 border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="left" width="100%">運費</td>
-                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%">$"""+ str(delivery_fee)+ """</td>
+                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%">$"""
+        + str(delivery_fee)
+        + """</td>
                                         </tr>
                                         <tr>
                                           <td class="fw-700 border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="left" width="100%">總金額</td>
-                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%">$"""+ str(price)+ """</td>
+                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%">$"""
+        + str(price)
+        + """</td>
                                         </tr>
                                       </tbody>
                                     </table>
@@ -205,8 +226,8 @@ def send_email(email,password,order_id,shopping_list,price,delivery_fee):
     )
 
     # Set up the email addresses and password. Please replace below with your email address and password
-    email_from = "eemailcheck9@gmail.com"
-    password = "qlqflzkffpsypkml"
+    email_from = os.getenv("email_account")
+    password = os.getenv("email_password")
     email_to = email
 
     # Generate today's date to be included in the email Subject
@@ -228,5 +249,3 @@ def send_email(email,password,order_id,shopping_list,price,delivery_fee):
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(email_from, password)
         server.sendmail(email_from, email_to, email_string)
-
-
